@@ -1,2 +1,2 @@
 #!/bin/bash
-sudo chgrp hello betty
+chown -R --from=gillaume betty hello
