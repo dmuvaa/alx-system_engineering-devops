@@ -1,2 +1,2 @@
 #!/bin/bash
-$ var=$'\*\\\\\'"Best School"\\\'\\\\*$\\?\\*\\*\\*\\*\\*:)';echo "$var"\*\\'"Best School"\'\\*$\?\*\*\*\*\*:)
+echo -e "Best School"
