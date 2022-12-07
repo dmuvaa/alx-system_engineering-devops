@@ -1,2 +1,2 @@
 #!/bin/bash
-tail -l 10 '*\'
+find . -type f -printf "%t - %p\n" | sort -n | tail -1
