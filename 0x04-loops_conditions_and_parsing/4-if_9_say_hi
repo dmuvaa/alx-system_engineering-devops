@@ -5,9 +5,9 @@ count=0
 
 while [ $count -le 10 ]
 do
+	echo "Best School"
 	if [ $count -eq 9 ]
 	then
-		echo "Best School"
 		echo "Hi"
 	else
 		echo "Best School"
