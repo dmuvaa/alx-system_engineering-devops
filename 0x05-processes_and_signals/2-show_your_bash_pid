@@ -2,4 +2,4 @@
 #Bash script that displays lines containing the bash word
 # shellcheck disable=SC2009
 
-ps auxf | grep bash | awk '{print $2}'
+ps aux | grep bash
