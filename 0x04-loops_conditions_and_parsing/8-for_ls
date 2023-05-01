@@ -1,12 +1,7 @@
 #!/usr/bin/env bash
 #Bash script that displays the content of the current directory
 
-for file in *;
+for file in *
 do
-	if [[ $file != .* && $file == *-* ]];
-	then
-		name=${file#*-}
-
-		echo "- $name"
-	fi
+	echo "$i" | cut -f 2- -d '-'
 done
