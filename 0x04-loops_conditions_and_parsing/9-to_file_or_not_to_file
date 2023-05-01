@@ -1,19 +1,17 @@
 #!/usr/bin/env bash
 #Bash script that gives you information about the school file
 
-FILE_PATH="/path/to/school/file"
-if [ -e "$FILE_PATH" ];
-then
+if [ -e school ];
 	echo "school file exists"
-	if [ -s "$FILE_PATH" ];
+	if [ -s school ];
 	then
 		echo "school file is not empty"
-		if [ -f "$FILE_PATH" ];
-		then
-			echo "school is a regular file"
-		fi
 	else
 		echo "school file is empty"
+	fi
+	if [ -f school ];
+	then
+		echo "school is a regular file"
 	fi
 else
 	echo "school file does not exist"
