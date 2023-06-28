@@ -1,13 +1,12 @@
 #Client configuration file
 file_line { 'Turn off passwd auth':
+  ensure => 'present',
   path   => '/etc/ssh/sshd_config',
-  line   => 'PasswordAuthentication no',
-  ensure => present,
+  line   => '	PasswordAuthentication no',
 }
 
-#declare file identity
 file_line { 'Declare identity file':
+  ensure => 'present',
   path   => '/etc/ssh/ssh_config',
-  line   => 'IdentityFile ~/.ssh/school',
-  ensure => present,
+  line   => '	IdentityFile ~/.ssh/school',
 }
