@@ -1,0 +1,22 @@
+#!/usr/bin/env bash
+
+#script for parameters
+if [ "$#" -ne 4 ]; then
+	echo "Usage: 0-transfer_file PATH_TO_FILE IP USERNAME PATH_TO_SSH_KEY"
+	exit 1
+fi
+
+#assign input to variables
+PATH_TO_FILE=$1
+IP=$2
+USERNAME=$3
+PATH_TO_SSH_KEY=$4
+
+#transfer files with scp
+scp -i $PATH_TO_SSH_KEY -o StrictHostKeyChecking=no $PATH_TO_FILE $USERNAME@$IP:~/
+
+#exit scp
+if [ "$?" -eq 0 ]; then
+	echo "File transferred successfully."
+	exit 1
+fi
