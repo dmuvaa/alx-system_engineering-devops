@@ -1,0 +1,14 @@
+#!/usr/bin/env bash
+#redirect to 301
+
+sudo apt-get update
+sudo apt-get install -y nginx
+
+#run nginx
+
+sudo update-rc.d nginx defaults
+echo "Hello World!" | sudo tee /var/www/html/index
+
+sudo sed -i '/listen 80 default-server/a rewrite ^/redirect_me https://www.youtube.com/ permanent;' /etc/nginx/sites-available/default
+
+sudo service nginx restart
