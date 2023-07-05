@@ -1,0 +1,5 @@
+#!/usr/bin/env bash
+#Make sure Nginx is running on port 80
+service nginx start
+curl 0:80
+service nginx status | grep "nginx is not running"
