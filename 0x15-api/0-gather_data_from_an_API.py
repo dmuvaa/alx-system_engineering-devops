@@ -40,9 +40,11 @@ def main():
             if todo['completed']:
                 completed_tasks.append(todo['title'])
 
-    print(f"Employee {user_data['name']} is done with tasks({len(completed_tasks)}/{total_tasks}):")
+    print(f"Employee {user_data['name']} is done with tasks"
+          f"({len(completed_tasks)}/{total_tasks}):")
     for task in completed_tasks:
         print(f"\t {task}")
+
 
 if __name__ == '__main__':
     main()
