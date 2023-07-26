@@ -1,7 +1,10 @@
 #!/usr/bin/python3
 
+"""imports a request"""
+
 import requests
 import sys
+
 
 def main():
     """Main Function of the API"""
