@@ -1,5 +1,8 @@
 #!/usr/bin/python3
-"""Imports a Module"""
+
+"""
+Imports a Module.
+"""
 
 import csv
 import requests
