@@ -42,7 +42,7 @@ def main():
         for todo in todos_data:
             if todo['userId'] == user_id:
                 writer.writerow({'USER_ID': user_id,
-                                 'USERNAME': user_data['username']
+                                 'USERNAME': user_data['username'],
                                  'TASK_COMPLETED_STATUS': todo['completed'],
                                  'TASK_TITLE': todo['title']})
 
