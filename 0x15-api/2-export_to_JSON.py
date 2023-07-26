@@ -2,9 +2,9 @@
 
 """Imports a Module"""
 
-import sys
-import requests
 import json
+import requests
+import sys
 
 if len(sys.argv) < 2:
     print("Error: No employee ID provided.")
