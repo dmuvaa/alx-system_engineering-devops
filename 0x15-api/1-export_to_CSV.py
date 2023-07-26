@@ -32,13 +32,18 @@ def main():
     user_data = user_response.json()
 
     with open(f'{user_id}.csv', 'w', newline='') as csvfile:
-        fieldnames = ['USER_ID', 'USERNAME', 'TASK_COMPLETED_STATUS', 'TASK_TITLE']
-        writer = csv.DictWriter(csvfile, fieldnames=fieldnames, quoting=csv.QUOTE_ALL)
+        fieldnames = ['USER_ID', 'USERNAME',
+                      'TASK_COMPLETED_STATUS', 'TASK_TITLE']
+        writer = csv.DictWriter(csvfile, fieldnames=fieldnames,
+                                quoting=csv.QUOTE_ALL)
 
         for todo in todos_data:
             if todo['userId'] == user_id:
-                writer.writerow({'USER_ID': user_id, 'USERNAME': user_data['name'],
-                    'TASK_COMPLETED_STATUS': todo['completed'], 'TASK_TITLE': todo['title']})
+                writer.writerow({'USER_ID': user_id,
+                                 'USERNAME': user_data['username']
+                                 'TASK_COMPLETED_STATUS': todo['completed'],
+                                 'TASK_TITLE': todo['title']})
+
 
 if __name__ == '__main__':
     main()
