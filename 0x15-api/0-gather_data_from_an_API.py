@@ -28,17 +28,16 @@ def main():
     user_data = user_response.json()
 
     total_tasks = 0
-    compiled_tasks = []
+    completed_tasks = []
 
-    for todo in todos.data:
-        if todo['user_Id'] == user_id:
+    for todo in todos_data:
+        if todo['userId'] == user_id:
             total_tasks += 1
 
             if todo['completed']:
                 completed_tasks.append(todo['title'])
 
-    print(f"Employee {user_data['name']} is done with tasks
-          ({len(completed_tasks)}/{total_tasks}):")
+    print(f"Employee {user_data['name']} is done with tasks({len(completed_tasks)}/{total_tasks}):")
     for task in completed_tasks:
         print(f"\t {task}")
 
