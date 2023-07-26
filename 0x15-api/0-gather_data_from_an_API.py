@@ -2,8 +2,8 @@
 
 """imports a request"""
 
-import sys
 import requests
+import sys
 
 
 def main():
