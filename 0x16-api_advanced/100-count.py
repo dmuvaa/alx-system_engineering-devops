@@ -5,54 +5,46 @@
 import requests
 
 
-def fetch_articles(subreddit, after=None):
-    """Fetches articles from Reddit API."""
-    base_url = 'https://www.reddit.com/r/'
-    url = f'{base_url}{subreddit}/hot.json'
-    
-    headers = {
-        'User-Agent': 'Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:91.0) '
-                      'Gecko/20100101 Firefox/91.0'
-    }
+def count_words(subreddit, word_list, word_count={}, after=None):
+    """Queries the Reddit API and returns the count of words in
+    word_list in the titles of all the hot posts
+    of the subreddit"""
+    import requests
 
-    if after:
-        url += f'?after={after}'
-
-    response = requests.get(url, headers=headers, allow_redirects=False)
-    
-    if response.status_code != 200:
+    sub_info = requests.get("https://www.reddit.com/r/{}/hot.json"
+                            .format(subreddit),
+                            params={"after": after},
+                            headers={"User-Agent": "My-User-Agent"},
+                            allow_redirects=False)
+    if sub_info.status_code != 200:
         return None
 
-    return response.json()['data']
+    info = sub_info.json()
 
+    hot_l = [child.get("data").get("title")
+             for child in info
+             .get("data")
+             .get("children")]
+    if not hot_l:
+        return None
 
-def count_words(subreddit, word_list, after=None, counts=None):
-    """Counts occurrences of words in subreddit titles."""
+    word_list = list(dict.fromkeys(word_list))
 
-    # Initialize counts dictionary
-    if counts is None:
-        counts = {word.lower(): 0 for word in word_list}
+    if word_count == {}:
+        word_count = {word: 0 for word in word_list}
 
-    # Get articles
-    data = fetch_articles(subreddit, after)
-    
-    if not data:
-        if not after:  # First call
-            return
-        else:
-            # Sort and print the results
-            sorted_results = sorted(counts.items(), key=lambda x: (-x[1], x[0]))
-            for word, count in sorted_results:
-                if count > 0:
-                    print(f"{word}: {count}")
-            return
-
-    # Iterate through the articles
-    for article in data['children']:
-        title = article['data']['title'].lower()
+    for title in hot_l:
+        split_words = title.split(' ')
         for word in word_list:
-            word_lower = word.lower()
-            counts[word_lower] += title.split().count(word_lower)
+            for s_word in split_words:
+                if s_word.lower() == word.lower():
+                    word_count[word] += 1
 
-    # Recursively call function for next set of articles
-    count_words(subreddit, word_list, data['after'], counts)
+    if not info.get("data").get("after"):
+        sorted_counts = sorted(word_count.items(), key=lambda kv: kv[0])
+        sorted_counts = sorted(word_count.items(),
+                               key=lambda kv: kv[1], reverse=True)
+        [print('{}: {}'.format(k, v)) for k, v in sorted_counts if v != 0]
+    else:
+        return count_words(subreddit, word_list, word_count,
+                           info.get("data").get("after"))
