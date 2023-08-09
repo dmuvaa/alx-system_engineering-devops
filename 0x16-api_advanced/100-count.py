@@ -16,8 +16,7 @@ def count_words(subreddit, word_list, word_count=None, after=None):
     url = f"https://www.reddit.com/r/{subreddit}/hot.json"
     headers = {"User-Agent": "My-User-Agent"}
     
-    response = requests.get(url, headers=headers
-                            params={"after": after}, allow_redirects=False)
+    response = requests.get(url, headers=headers, params={"after": after}, allow_redirects=False)
 
     if response.status_code != 200:
         return
@@ -34,8 +33,7 @@ def count_words(subreddit, word_list, word_count=None, after=None):
     next_page = data["data"].get("after")
     
     if not next_page:
-        sorted_counts = sorted(word_count.items(), 
-                               key=lambda kv: (kv[1], kv[0]), reverse=True)
+        sorted_counts = sorted(word_count.items(), key=lambda kv: (kv[1], kv[0]), reverse=True)
         for k, v in sorted_counts:
             if v != 0:
                 print(f'{k}: {v}')
