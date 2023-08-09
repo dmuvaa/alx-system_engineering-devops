@@ -1,21 +1,6 @@
-#puppet file for apache
-class fix_apache_error {
+#run exec command while capturing its strace
 
-  # Ensure correct permission for WordPress configuration
-  file { '/var/www/html/wordpress/wp-config.php':
-    ensure  => 'file',
-    owner   => 'www-data',
-    group   => 'www-data',
-    mode    => '0644',
-  }
-
-  # Ensure Apache is restarted if the file's permissions are corrected
-  ~> Service['apache2']:
-    ensure    => 'running',
-    enable    => true,
-    subscribe => File['/var/www/html/wordpress/wp-config.php'],
-  }
-
+exec {'new word':
+    command  => 'sed -i s/phpp/php/g /var/www/html/wp-settings.php',
+    provider => shell,
 }
-
-include fix_apache_error
