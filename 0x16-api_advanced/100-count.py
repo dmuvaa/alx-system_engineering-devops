@@ -4,11 +4,8 @@
 
 import requests
 
-
 def count_words(subreddit, word_list, word_count=None, after=None):
-    """Queries the Reddit API and returns the count of words in
-    word_list in the titles of all the hot posts
-    of the subreddit"""
+    """Queries the Reddit API"""
     
     if word_count is None:
         word_count = {word: 0 for word in word_list}
